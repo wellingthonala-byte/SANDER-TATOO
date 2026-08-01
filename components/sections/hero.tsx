@@ -8,6 +8,7 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import { WhatsappIcon } from "@/components/icons/whatsapp";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site";
+import { asset } from "@/lib/assets";
 import { whatsappLink } from "@/lib/whatsapp";
 
 type HeadlinePart = { text: string; accent?: boolean };
@@ -47,7 +48,7 @@ export function Hero() {
             className="grain-overlay absolute inset-[-8%]"
           >
             <Image
-              src="/images/hero-tattoo.webp"
+              src={asset("/images/hero-tattoo.webp")}
               alt="Detalhe de tatuagem em realismo sendo finalizada no estúdio Sander Tattoo Ink"
               fill
               priority

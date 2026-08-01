@@ -8,6 +8,7 @@ import { WhatsappIcon } from "@/components/icons/whatsapp";
 import { Button } from "@/components/ui/button";
 import { EASE, viewportOnce } from "@/lib/motion";
 import { siteConfig } from "@/lib/site";
+import { asset } from "@/lib/assets";
 import { whatsappLink } from "@/lib/whatsapp";
 
 export function Cta() {
@@ -32,7 +33,7 @@ export function Cta() {
         className="grain-overlay absolute inset-[-14%] -z-10"
       >
         <Image
-          src="/images/cta-bg.webp"
+          src={asset("/images/cta-bg.webp")}
           alt=""
           fill
           loading="lazy"

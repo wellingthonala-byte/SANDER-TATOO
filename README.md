@@ -100,5 +100,35 @@ panorâmico) e revise os textos `alt` em `data/`.
 
 ## Deploy
 
-Pronto para a Vercel: importe o repositório, defina `NEXT_PUBLIC_SITE_URL` e faça o
-deploy — sem passos extras de build.
+O projeto tem dois alvos de build, selecionados por variável de ambiente.
+
+### Vercel (recomendado)
+
+Importe o repositório, defina `NEXT_PUBLIC_SITE_URL` e faça o deploy — sem passos
+extras. Mantém o runtime do Next: otimização de imagem sob demanda e headers HTTP
+customizados.
+
+### GitHub Pages (já configurado)
+
+O workflow `.github/workflows/deploy-pages.yml` publica automaticamente a cada push
+na branch de desenvolvimento. Ele gera um export estático (`STATIC_EXPORT=true`) e o
+envia para o Pages, que serve o site em
+`https://<usuário>.github.io/<repositório>/`.
+
+Como o Pages não roda Node, esse alvo desliga o otimizador de imagens
+(`images.unoptimized`) e os headers customizados; as imagens já são WebP comprimido,
+então são servidas como estão. Todo o resto é idêntico — a página é integralmente
+pré-renderizada nos dois casos.
+
+Detalhe importante para subpastas: o site fica em `/<repositório>/`, não na raiz do
+domínio. O `basePath` cuida das rotas e dos assets do Next, mas arquivos de `public/`
+precisam ser referenciados via `asset()` (`lib/assets.ts`) — é o que todos os
+componentes e arquivos de `data/` já fazem. Ao adicionar uma imagem nova, use o
+helper.
+
+Para rodar o export localmente:
+
+```bash
+STATIC_EXPORT=true NEXT_PUBLIC_BASE_PATH=/SANDER-TATOO npm run build
+npx serve out   # ou qualquer servidor estático
+```

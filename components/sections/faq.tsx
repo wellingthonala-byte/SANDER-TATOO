@@ -9,6 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { faqItems } from "@/data/faq";
+import { asset } from "@/lib/assets";
 
 /** Splits the questions into two balanced columns, as in the reference layout. */
 const columns = [
@@ -21,7 +22,7 @@ export function Faq() {
     <section id="faq" aria-labelledby="faq-title" className="relative overflow-hidden bg-ink py-24 lg:py-32">
       <div aria-hidden className="absolute inset-0 -z-10">
         <Image
-          src="/images/faq-bg.webp"
+          src={asset("/images/faq-bg.webp")}
           alt=""
           fill
           loading="lazy"

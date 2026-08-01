@@ -1,3 +1,5 @@
+import { asset } from "@/lib/assets";
+
 export type PortfolioCategory = {
   id: string;
   label: string;
@@ -101,7 +103,7 @@ export const portfolioItems: PortfolioItem[] = seeds.flatMap((seed, seedIndex) =
       category: seed.category,
       title,
       meta: seed.metas[index],
-      src: `/images/work-${String(imageIndex).padStart(2, "0")}.webp`,
+      src: asset(`/images/work-${String(imageIndex).padStart(2, "0")}.webp`),
       alt: `Tatuagem estilo ${categoryLabel(seed.category)} — ${title}, ${seed.metas[index]}`,
     };
   }),

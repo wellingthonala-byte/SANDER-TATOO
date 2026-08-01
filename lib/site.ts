@@ -8,7 +8,7 @@ export const siteConfig = {
   tagline: "Estúdio de tatuagem em São Paulo",
   description:
     "Estúdio de tatuagem especializado em realismo, fine line e blackwork. Projetos exclusivos, biossegurança rigorosa e acabamento impecável em São Paulo.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://sandertattooink.com.br",
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://sandertattooink.com.br").replace(/\/$/, ""),
   locale: "pt_BR",
   founded: "2014",
   contact: {

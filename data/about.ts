@@ -1,5 +1,7 @@
 import { Sparkles, ShieldCheck, UserRound, Building2, type LucideIcon } from "lucide-react";
 
+import { asset } from "@/lib/assets";
+
 export type Pillar = {
   icon: LucideIcon;
   title: string;
@@ -14,7 +16,7 @@ export const aboutContent = {
     "Trabalhamos com um número reduzido de sessões por dia para garantir atenção integral a cada projeto — do primeiro esboço ao último ponto de finalização.",
   ],
   image: {
-    src: "/images/studio.webp",
+    src: asset("/images/studio.webp"),
     alt: "Ambiente interno do estúdio Sander Tattoo Ink com iluminação baixa e quadros nas paredes",
   },
 } as const;

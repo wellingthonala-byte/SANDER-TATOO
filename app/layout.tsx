@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
   creator: siteConfig.name,
   publisher: siteConfig.name,
-  alternates: { canonical: "/" },
+  alternates: { canonical: `${siteConfig.url}/` },
   openGraph: {
     type: "website",
     locale: siteConfig.locale,
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [
       {
-        url: "/images/og-image.webp",
+        url: `${siteConfig.url}/images/og-image.webp`,
         width: 1200,
         height: 630,
         alt: `${siteConfig.name} — arte, técnica e propósito`,
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${siteConfig.name} — Estúdio de Tatuagem em São Paulo`,
     description: siteConfig.description,
-    images: ["/images/og-image.webp"],
+    images: [`${siteConfig.url}/images/og-image.webp`],
   },
   robots: {
     index: true,
