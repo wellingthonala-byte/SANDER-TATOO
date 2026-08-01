@@ -1,0 +1,261 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------- theme --- */
+
+@theme {
+  /* Surfaces */
+  --color-ink: #050505;
+  --color-ink-soft: #0a0a0a;
+  --color-surface: #111111;
+  --color-surface-raised: #161616;
+  --color-hairline: rgba(255, 255, 255, 0.08);
+  --color-hairline-strong: rgba(255, 255, 255, 0.16);
+
+  /* Text */
+  --color-foreground: #ffffff;
+  --color-muted: #b8b8b8;
+  --color-faint: #858585;
+
+  /* Brand */
+  --color-brand: #b32626;
+  --color-brand-hover: #d53a3a;
+  --color-brand-soft: rgba(179, 38, 38, 0.14);
+  --color-bronze: #c89a6b;
+
+  /* Type */
+  --font-display: var(--font-display), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Motion */
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-accordion-down: accordion-down 0.35s var(--ease-premium);
+  --animate-accordion-up: accordion-up 0.3s var(--ease-premium);
+  --animate-pulse-ring: pulse-ring 2.6s var(--ease-premium) infinite;
+  --animate-marquee: marquee 42s linear infinite;
+  --animate-fade-in: fade-in 0.35s var(--ease-premium);
+  /* Hero intro runs on CSS alone so the first paint is already the final frame
+     of a real animation — no waiting for hydration, no LCP penalty. */
+  --animate-rise: rise 0.75s var(--ease-premium) both;
+  --animate-rise-soft: rise-soft 0.9s var(--ease-premium) both;
+  --animate-reveal-image: reveal-image 1.6s var(--ease-premium) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(56%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes rise-soft {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes reveal-image {
+    from {
+      opacity: 0;
+      transform: scale(1.08);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  --animate-zoom-in: zoom-in 0.45s var(--ease-premium);
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes zoom-in {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+      opacity: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+      opacity: 1;
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+      opacity: 1;
+    }
+    to {
+      height: 0;
+      opacity: 0;
+    }
+  }
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(1);
+      opacity: 0.55;
+    }
+    70% {
+      transform: scale(1.9);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1.9);
+      opacity: 0;
+    }
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ base --- */
+
+@layer base {
+  * {
+    border-color: var(--color-hairline);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* keeps anchored sections clear of the fixed header */
+    scroll-padding-top: 5.5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    letter-spacing: 0.01em;
+  }
+
+  ::selection {
+    background: var(--color-brand);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-hover);
+    outline-offset: 3px;
+  }
+
+  /* Scrollbar — thin, matches the dark shell */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-ink);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1d1d1d;
+    border-radius: 999px;
+    border: 3px solid var(--color-ink);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2a2a2a;
+  }
+}
+
+/* --------------------------------------------------------------- helpers --- */
+
+@utility container-page {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 84rem;
+  padding-inline: 1.25rem;
+
+  @media (width >= 48rem) {
+    padding-inline: 2rem;
+  }
+  @media (width >= 80rem) {
+    padding-inline: 3rem;
+  }
+}
+
+/* Hairline rule that fades out at both ends */
+@utility rule-fade {
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-hairline-strong) 18%,
+    var(--color-hairline-strong) 82%,
+    transparent
+  );
+}
+
+@utility text-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+/* Very subtle film grain, applied over dark photography */
+@utility grain-overlay {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.32;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
