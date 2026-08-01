@@ -5,18 +5,19 @@ on:
     branches: [claude/premium-tattoo-landing-eqn0fd]
   workflow_dispatch:
 
+# Publishing happens by pushing the built site to the `gh-pages` branch, which
+# needs nothing beyond write access to the repository. The alternative — the
+# actions/deploy-pages route — additionally requires permission to create the
+# Pages site itself, which the default GITHUB_TOKEN does not have.
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
-# One deployment at a time; never cancel one that is already publishing.
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -29,38 +30,26 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # `enablement: true` turns Pages on for the repository on the first run,
-      # and exposes the base path/URL the project page is served from.
-      - name: Configure Pages
-        id: pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-
       - name: Build static export
         run: npm run build
         env:
           STATIC_EXPORT: "true"
-          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
-          NEXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
+          # Project pages are served from /<repo>/, never the domain root.
+          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+          NEXT_PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
 
-      # Pages serves through Jekyll unless told otherwise, and Jekyll drops
-      # directories starting with an underscore — which is where Next puts
-      # every asset (_next/).
-      - name: Disable Jekyll processing
-        run: touch out/.nojekyll
-
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: out
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Publish to gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          # Pages runs Jekyll by default, which drops directories starting with
+          # an underscore — and that is where Next puts every asset (_next/).
+          touch out/.nojekyll
+          cd out
+          git init -q -b gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "deploy: ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages

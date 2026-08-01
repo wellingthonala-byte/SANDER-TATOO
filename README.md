@@ -108,12 +108,20 @@ Importe o repositório, defina `NEXT_PUBLIC_SITE_URL` e faça o deploy — sem p
 extras. Mantém o runtime do Next: otimização de imagem sob demanda e headers HTTP
 customizados.
 
-### GitHub Pages (já configurado)
+### GitHub Pages (no ar)
 
-O workflow `.github/workflows/deploy-pages.yml` publica automaticamente a cada push
-na branch de desenvolvimento. Ele gera um export estático (`STATIC_EXPORT=true`) e o
-envia para o Pages, que serve o site em
-`https://<usuário>.github.io/<repositório>/`.
+https://wellingthonala-byte.github.io/SANDER-TATOO/
+
+O workflow `.github/workflows/deploy-pages.yml` roda a cada push na branch de
+desenvolvimento: gera o export estático (`STATIC_EXPORT=true`) e faz push do
+resultado para a branch `gh-pages`, de onde o Pages serve o site.
+
+A publicação usa a branch em vez da action `deploy-pages` porque esta última exige
+permissão para *criar* o site do Pages, que o `GITHUB_TOKEN` padrão não tem. Pelo
+caminho da branch, basta `contents: write` — e o próprio surgimento da `gh-pages`
+habilita o Pages automaticamente em repositórios públicos.
+
+Não edite a branch `gh-pages` à mão: ela é sobrescrita (`push -f`) a cada deploy.
 
 Como o Pages não roda Node, esse alvo desliga o otimizador de imagens
 (`images.unoptimized`) e os headers customizados; as imagens já são WebP comprimido,
