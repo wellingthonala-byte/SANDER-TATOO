@@ -85,7 +85,7 @@ export function Testimonials() {
                   key={item.id}
                   className="min-w-0 shrink-0 grow-0 basis-full pl-4 sm:basis-1/2 lg:basis-1/3 lg:pl-6"
                 >
-                  <figure className="group flex h-full flex-col border border-hairline bg-surface p-7 transition-all duration-700 ease-premium hover:-translate-y-1 hover:border-hairline-strong hover:bg-surface-raised lg:p-8">
+                  <figure className="group flex h-full flex-col border border-hairline bg-surface p-6 sm:p-7 transition-all duration-700 ease-premium hover:-translate-y-1 hover:border-hairline-strong hover:bg-surface-raised lg:p-8">
                     <Quote
                       className="size-7 text-brand/45 transition-colors duration-600 group-hover:text-brand"
                       strokeWidth={1}
@@ -130,7 +130,7 @@ export function Testimonials() {
                         <span className="font-display text-lg leading-tight text-white">
                           {item.name}
                         </span>
-                        <span className="mt-1 text-[0.625rem] uppercase tracking-[0.2em] text-faint">
+                        <span className="mt-1 text-[0.6875rem] uppercase tracking-[0.2em] text-faint sm:text-[0.625rem]">
                           {item.role}
                         </span>
                       </span>
@@ -141,7 +141,9 @@ export function Testimonials() {
             </ul>
           </div>
 
-          <div className="mt-10 flex justify-center gap-2">
+          {/* The visible indicator is a hairline, but the button around it is a
+              full-size touch target. */}
+          <div className="mt-6 flex justify-center lg:mt-8">
             {snaps.map((_, index) => (
               <button
                 key={index}
@@ -149,11 +151,18 @@ export function Testimonials() {
                 onClick={() => emblaApi?.scrollTo(index)}
                 aria-label={`Ir para o depoimento ${index + 1}`}
                 aria-current={selected === index}
-                className={cn(
-                  "h-px w-8 transition-all duration-600 ease-premium",
-                  selected === index ? "bg-brand-hover" : "bg-hairline-strong hover:bg-white/40",
-                )}
-              />
+                className="group/dot flex size-11 items-center justify-center"
+              >
+                <span
+                  aria-hidden
+                  className={cn(
+                    "block h-0.5 w-8 transition-colors duration-600 ease-premium",
+                    selected === index
+                      ? "bg-brand-hover"
+                      : "bg-hairline-strong group-hover/dot:bg-white/40",
+                  )}
+                />
+              </button>
             ))}
           </div>
         </div>

@@ -7,6 +7,7 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 
 import { WhatsappIcon } from "@/components/icons/whatsapp";
 import { Button } from "@/components/ui/button";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { siteConfig } from "@/lib/site";
 import { asset } from "@/lib/assets";
 import { whatsappLink } from "@/lib/whatsapp";
@@ -23,6 +24,11 @@ const headline: HeadlinePart[][] = [
 export function Hero() {
   const sectionRef = React.useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
+  // Scroll-linked transforms repaint a full-bleed image on every frame, which
+  // is the kind of work phone GPUs are worst at — and the depth effect barely
+  // reads on a small screen. Not worth the frames.
+  const coarsePointer = useMediaQuery("(pointer: coarse)");
+  const staticArtwork = reduceMotion || coarsePointer;
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -44,8 +50,8 @@ export function Hero() {
       <div className="absolute inset-0">
         <div className="absolute inset-0 animate-reveal-image">
           <m.div
-            style={reduceMotion ? undefined : { y: imageY, scale: imageScale }}
-            className="grain-overlay absolute inset-[-8%]"
+            style={staticArtwork ? undefined : { y: imageY, scale: imageScale }}
+            className="grain-overlay absolute inset-0 lg:inset-[-8%]"
           >
             <Image
               src={asset("/images/hero-tattoo.webp")}
@@ -72,7 +78,7 @@ export function Hero() {
       </div>
 
       <m.div
-        style={reduceMotion ? undefined : { y: contentY, opacity: contentOpacity }}
+        style={staticArtwork ? undefined : { y: contentY, opacity: contentOpacity }}
         className="container-page relative z-10 pt-32 pb-28 lg:pt-40 lg:pb-36"
       >
         <div className="max-w-2xl">
@@ -143,7 +149,7 @@ export function Hero() {
       >
         <span className="text-[0.5625rem] uppercase tracking-[0.34em]">Role</span>
         <m.span
-          animate={reduceMotion ? undefined : { y: [0, 6, 0] }}
+          animate={staticArtwork ? undefined : { y: [0, 6, 0] }}
           transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
         >
           <ChevronDown className="size-4" />

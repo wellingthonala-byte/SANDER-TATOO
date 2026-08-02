@@ -60,7 +60,7 @@ export function Header() {
         >
           <a
             href="#inicio"
-            className="shrink-0 text-white transition-opacity duration-400 hover:opacity-80"
+            className="flex min-h-11 shrink-0 items-center text-white transition-opacity duration-400 hover:opacity-80"
           >
             <Logo />
           </a>

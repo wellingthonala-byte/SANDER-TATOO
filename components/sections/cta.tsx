@@ -6,6 +6,7 @@ import { m, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
 import { WhatsappIcon } from "@/components/icons/whatsapp";
 import { Button } from "@/components/ui/button";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { EASE, viewportOnce } from "@/lib/motion";
 import { siteConfig } from "@/lib/site";
 import { asset } from "@/lib/assets";
@@ -14,6 +15,8 @@ import { whatsappLink } from "@/lib/whatsapp";
 export function Cta() {
   const sectionRef = React.useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
+  const coarsePointer = useMediaQuery("(pointer: coarse)");
+  const staticArtwork = reduceMotion || coarsePointer;
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -24,13 +27,14 @@ export function Cta() {
   return (
     <section
       ref={sectionRef}
+      id="cta"
       aria-labelledby="cta-title"
       className="relative isolate overflow-hidden border-y border-hairline"
     >
       <m.div
         aria-hidden
-        style={reduceMotion ? undefined : { y }}
-        className="grain-overlay absolute inset-[-14%] -z-10"
+        style={staticArtwork ? undefined : { y }}
+        className="grain-overlay absolute inset-0 -z-10 lg:inset-[-14%]"
       >
         <Image
           src={asset("/images/cta-bg.webp")}

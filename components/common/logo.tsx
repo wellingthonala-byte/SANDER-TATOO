@@ -33,7 +33,7 @@ export function Logo({ className, compact = false }: LogoProps) {
           <span className="font-display text-lg font-light uppercase tracking-[0.2em] text-white">
             Sander
           </span>
-          <span className="mt-1 text-[0.5rem] font-medium uppercase tracking-[0.42em] text-muted">
+          <span className="mt-1 text-[0.5625rem] font-medium uppercase tracking-[0.36em] text-muted sm:text-[0.5rem] sm:tracking-[0.42em]">
             Tattoo Ink
           </span>
         </span>

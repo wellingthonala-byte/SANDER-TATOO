@@ -147,6 +147,11 @@
     /* keeps anchored sections clear of the fixed header */
     scroll-padding-top: 5.5rem;
     -webkit-tap-highlight-color: transparent;
+    /* Entrance animations translate elements sideways before settling. On a
+       phone the container is full-bleed, so that travel would widen the page
+       and create a horizontal scroll. `clip` trims it without turning the
+       element into a scroll container (which `hidden` would). */
+    overflow-x: clip;
   }
 
   body {
@@ -156,7 +161,7 @@
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   h1,
@@ -229,6 +234,14 @@
   font-weight: 500;
   letter-spacing: 0.28em;
   text-transform: uppercase;
+}
+
+/* Minimum comfortable hit area for touch input (WCAG 2.5.8 target size). */
+@utility tap-target {
+  @media (pointer: coarse) {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }
 
 /* Very subtle film grain, applied over dark photography */

@@ -28,9 +28,11 @@ const DialogContent = React.forwardRef<
     >
       {children}
       {!hideClose ? (
+        // Above the panel where there is room; tucked into the corner on
+        // phones, where placing it outside would push it off-screen.
         <DialogPrimitive.Close
           aria-label="Fechar"
-          className="absolute -top-12 right-0 flex size-10 items-center justify-center border border-hairline text-white transition-colors duration-400 hover:border-hairline-strong hover:bg-white/5"
+          className="absolute top-2 right-2 flex size-11 items-center justify-center border border-hairline bg-ink/70 text-white backdrop-blur-sm transition-colors duration-400 hover:border-hairline-strong hover:bg-white/10 sm:-top-12 sm:right-0 sm:size-10 sm:bg-transparent sm:backdrop-blur-none"
         >
           <X className="size-4" />
         </DialogPrimitive.Close>

@@ -2,8 +2,12 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
+/**
+ * `text-base` on small screens is deliberate: iOS Safari zooms the viewport
+ * when a focused field renders below 16px, which throws the layout off.
+ */
 const fieldStyles =
-  "w-full border border-hairline bg-surface/60 px-4 py-3.5 text-sm text-white placeholder:text-faint transition-colors duration-400 ease-premium hover:border-hairline-strong focus:border-brand/60 focus:bg-surface focus:outline-none disabled:opacity-50 aria-[invalid=true]:border-brand/70";
+  "w-full border border-hairline bg-surface/60 px-4 py-3.5 text-base text-white placeholder:text-faint transition-colors duration-400 ease-premium hover:border-hairline-strong focus:border-brand/60 focus:bg-surface focus:outline-none disabled:opacity-50 sm:text-sm aria-[invalid=true]:border-brand/70";
 
 const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
   ({ className, type = "text", ...props }, ref) => (

@@ -64,12 +64,12 @@ export function Footer() {
         </div>
 
         <nav aria-label="Navegação do rodapé" className="mt-14 border-t border-hairline pt-8">
-          <ul className="flex flex-wrap gap-x-6 gap-y-3">
+          <ul className="flex flex-wrap gap-x-5 gap-y-1">
             {navItems.map((item) => (
               <li key={item.id}>
                 <a
                   href={`#${item.id}`}
-                  className="text-[0.625rem] uppercase tracking-[0.22em] text-faint transition-colors duration-400 hover:text-white"
+                  className="inline-flex min-h-11 items-center text-[0.6875rem] uppercase tracking-[0.2em] text-faint transition-colors duration-400 hover:text-white sm:min-h-0 sm:text-[0.625rem] sm:tracking-[0.22em]"
                 >
                   {item.label}
                 </a>
@@ -131,7 +131,7 @@ function FooterLink({
         href={href}
         target={external ? "_blank" : undefined}
         rel={external ? "noopener noreferrer" : undefined}
-        className="group flex items-center gap-2.5 text-[0.8125rem] text-muted transition-colors duration-400 hover:text-white"
+        className="group inline-flex min-h-11 items-center gap-2.5 text-[0.8125rem] text-muted transition-colors duration-400 hover:text-white sm:min-h-0"
       >
         {icon ? (
           <span className="text-faint transition-colors duration-400 group-hover:text-brand-hover">

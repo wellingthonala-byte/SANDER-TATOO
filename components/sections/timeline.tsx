@@ -52,7 +52,7 @@ export function Timeline() {
                 <div className="relative shrink-0">
                   <span
                     aria-hidden
-                    className="absolute -top-2 left-1/2 z-10 -translate-x-1/2 border border-hairline bg-ink px-2 py-0.5 font-sans text-[0.5625rem] tracking-[0.14em] text-bronze transition-colors duration-600 group-hover:border-brand/50 group-hover:text-brand-hover"
+                    className="absolute -top-2 left-1/2 z-10 -translate-x-1/2 border border-hairline bg-ink px-2 py-0.5 font-sans text-[0.625rem] tracking-[0.14em] text-bronze sm:text-[0.5625rem] transition-colors duration-600 group-hover:border-brand/50 group-hover:text-brand-hover"
                   >
                     {String(step).padStart(2, "0")}
                   </span>

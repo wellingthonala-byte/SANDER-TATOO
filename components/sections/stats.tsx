@@ -36,7 +36,7 @@ export function Stats() {
                 <span aria-hidden>0</span>
               )}
             </span>
-            <span className="mt-3 block text-[0.625rem] uppercase tracking-[0.24em] text-faint">
+            <span className="mt-3 block text-[0.6875rem] uppercase tracking-[0.2em] text-faint sm:text-[0.625rem] sm:tracking-[0.24em]">
               {stat.label}
             </span>
           </dd>

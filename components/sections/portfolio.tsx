@@ -95,7 +95,10 @@ export function Portfolio() {
                         </span>
 
                         <span className="pointer-events-none absolute inset-0 flex flex-col justify-end p-4 text-left sm:p-5">
-                          <span className="translate-y-2 opacity-0 transition-all duration-600 ease-premium group-hover:translate-y-0 group-hover:opacity-100">
+                          {/* Shown outright on phones — there is no hover to
+                              trigger it there — and revealed on hover from the
+                              tablet breakpoint up. */}
+                          <span className="translate-y-0 opacity-100 transition-all duration-600 ease-premium sm:translate-y-2 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100">
                             <span className="flex items-center gap-2 text-[0.625rem] uppercase tracking-[0.24em] text-brand-hover">
                               <Expand className="size-3.5" />
                               Visualizar
@@ -104,7 +107,7 @@ export function Portfolio() {
                           <span className="mt-2.5 font-display text-lg text-white sm:text-xl">
                             {work.title}
                           </span>
-                          <span className="mt-1 text-[0.6875rem] tracking-[0.14em] text-muted uppercase">
+                          <span className="mt-1 text-[0.6875rem] tracking-[0.12em] text-muted uppercase">
                             {work.meta}
                           </span>
                         </span>
@@ -136,7 +139,9 @@ export function Portfolio() {
         <DialogContent>
           {preview ? (
             <figure className="border border-hairline bg-surface">
-              <div className="relative aspect-4/5 w-full sm:aspect-16/10">
+              {/* Capped in viewport units so the panel always fits the screen,
+                  caption included, without the page scrolling behind it. */}
+              <div className="relative h-[62svh] w-full sm:aspect-16/10 sm:h-auto">
                 <Image
                   src={preview.src}
                   alt={preview.alt}
@@ -145,7 +150,7 @@ export function Portfolio() {
                   className="object-cover"
                 />
               </div>
-              <figcaption className="flex flex-wrap items-center justify-between gap-2 border-t border-hairline px-5 py-4">
+              <figcaption className="flex flex-wrap items-center justify-between gap-2 border-t border-hairline px-4 py-4 sm:px-5">
                 <DialogTitle className="font-display text-xl text-white">
                   {preview.title}
                 </DialogTitle>

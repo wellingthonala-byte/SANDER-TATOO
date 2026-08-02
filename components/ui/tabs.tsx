@@ -14,7 +14,9 @@ const TabsList = React.forwardRef<
   <TabsPrimitive.List
     ref={ref}
     className={cn(
-      "flex w-full items-center justify-start gap-2 overflow-x-auto md:justify-center [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+      // Horizontal scroll on narrow screens, with snap so a swipe lands on a
+      // category instead of stopping halfway through one.
+      "flex w-full snap-x snap-mandatory items-center justify-start gap-2 overflow-x-auto scroll-px-5 md:justify-center md:snap-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
       className,
     )}
     {...props}
@@ -29,7 +31,7 @@ const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      "relative shrink-0 px-4 py-3 text-[0.6875rem] font-medium uppercase tracking-[0.22em] text-faint transition-colors duration-400 ease-premium hover:text-white/80 data-[state=active]:text-white sm:px-6 sm:text-xs",
+      "tap-target relative shrink-0 snap-start px-4 py-3.5 text-[0.6875rem] font-medium uppercase tracking-[0.22em] text-faint transition-colors duration-400 ease-premium hover:text-white/80 data-[state=active]:text-white sm:px-6 sm:py-3 sm:text-xs",
       className,
     )}
     {...props}

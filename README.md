@@ -97,6 +97,13 @@ panorâmico) e revise os textos `alt` em `data/`.
   easing; `prefers-reduced-motion` desliga parallax, autoplay do carrossel e transições.
 - **Acessibilidade.** Navegação por teclado, skip link, `aria-current` no scroll-spy,
   foco visível, rótulos em todos os campos e alt descritivo em todas as imagens.
+- **Celular tratado como caso principal, não como sobra.** Campos em 16px (abaixo
+  disso o Safari do iOS dá zoom ao focar); alvos de toque de 44px; o overlay do
+  portfólio aparece sem depender de `hover`, que não existe no toque; parallax
+  desligado em ponteiro grosseiro (`pointer: coarse`), onde custa frames e quase não
+  se percebe; `overflow-x: clip` na raiz para conter o deslocamento lateral das
+  animações de entrada; e o botão flutuante do WhatsApp sai de cena sobre o
+  formulário e o CTA final, onde cobriria os próprios campos que duplica.
 
 ## Deploy
 
