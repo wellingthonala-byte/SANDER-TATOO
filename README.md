@@ -78,7 +78,7 @@ grava nas fotos.
 | --- | --- |
 | `hero-tattoo.webp` | Hero |
 | `studio.webp` | Coluna lateral da seção Sobre |
-| `work-sleeve.webp`, `work-forearm.webp` | Portfólio |
+| `work-*.webp` | Portfólio (uma por obra) |
 | `cta-bg.webp` | Fundo do CTA final |
 | `faq-bg.webp` | Fundo do FAQ |
 | `og-image.webp` | Prévia ao compartilhar (Open Graph) |
