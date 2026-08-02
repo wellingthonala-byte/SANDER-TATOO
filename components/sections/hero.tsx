@@ -66,7 +66,7 @@ export function Hero() {
         </div>
 
         {/* Overlays: keep the left column readable, let the artwork breathe on the right */}
-        <div aria-hidden className="absolute inset-0 bg-ink/74 lg:hidden" />
+        <div aria-hidden className="absolute inset-0 bg-ink/66 lg:hidden" />
         <div
           aria-hidden
           className="absolute inset-0 hidden bg-linear-to-r from-ink from-20% via-ink/70 via-50% to-ink/5 lg:block"

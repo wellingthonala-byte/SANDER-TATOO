@@ -50,8 +50,7 @@ hooks/                   use-scrolled, use-active-section, use-media-query,
                          use-lock-body-scroll
 lib/                     site (config do estúdio), motion (variants), utils,
                          validations (Zod), whatsapp (deep link)
-public/images/           arte de apoio (ver abaixo)
-scripts/                 gerador das imagens de placeholder
+public/images/           fotografias do estúdio (ver abaixo)
 ```
 
 ### Onde editar o conteúdo
@@ -62,31 +61,48 @@ Nenhum texto fica preso dentro de componente. Para alterar o site:
   O JSON-LD, o rodapé, a seção de contato e todos os links de WhatsApp derivam desse arquivo.
 - **Menu**: `data/navigation.ts` — o `id` precisa bater com o `id` da `<section>`
   correspondente (o scroll-spy do header usa esse mesmo array).
-- **Portfólio**: `data/portfolio.ts` — categorias e obras. As obras são geradas a partir
-  de `seeds`; troque por uma lista literal ao usar fotos reais.
+- **Portfólio**: `data/portfolio.ts` — categorias e obras. Uma categoria sem obra
+  publicada some do filtro sozinha, então basta adicionar entradas para novas abas
+  aparecerem.
 - **Demais seções**: `data/about.ts`, `data/features.ts`, `data/timeline.ts`,
   `data/testimonials.ts`, `data/faq.ts`.
 
 ## Imagens
 
-`public/images/` contém **placeholders procedurais** (não são fotografias): texturas de
-tinta sobre pele geradas por `scripts/generate-images.mjs` com `sharp`, na paleta do
-projeto. Servem para o layout nascer completo e devem ser substituídas pelas fotos reais
-do estúdio, mantendo os mesmos nomes de arquivo — ou ajustando os caminhos nos arquivos
-de `data/`.
+`public/images/` traz fotografias reais do estúdio. Cada arquivo é um recorte
+específico, não a foto inteira — o hero é vertical, o CTA é panorâmico, o portfólio é
+4:5 — e todos são reencodados sem EXIF, o que remove as coordenadas de GPS que o iPhone
+grava nas fotos.
 
-Para regenerar:
+| Arquivo | Onde aparece |
+| --- | --- |
+| `hero-tattoo.webp` | Hero |
+| `studio.webp` | Coluna lateral da seção Sobre |
+| `work-sleeve.webp`, `work-forearm.webp` | Portfólio |
+| `cta-bg.webp` | Fundo do CTA final |
+| `faq-bg.webp` | Fundo do FAQ |
+| `og-image.webp` | Prévia ao compartilhar (Open Graph) |
 
-```bash
-node scripts/generate-images.mjs ./public/images
-ONLY=hero node scripts/generate-images.mjs ./public/images   # apenas um arquivo
-```
+### Publicando uma nova obra
 
-Ao trocar por fotos reais, mantenha as proporções (portfólio 4:5, hero retrato, CTA
-panorâmico) e revise os textos `alt` em `data/`.
+1. Exporte a foto em **JPEG ou WebP** (o Next não lê HEIC), recortada em **4:5**, com
+   cerca de **860px** de largura e qualidade ~75.
+2. Salve em `public/images/`.
+3. Acrescente uma entrada em `portfolioItems`, em `data/portfolio.ts`, com `category`,
+   `title`, `meta` e um `alt` que descreva a tatuagem.
+
+Nada além disso: o grid se reorganiza conforme a quantidade de peças e a aba da
+categoria aparece assim que ela tiver a primeira obra.
+
+Como o build estático não redimensiona imagens, exporte cada arquivo já no tamanho
+final — uma foto de 4000px seria entregue inteira ao celular.
 
 ## Decisões de implementação
 
+- **Nada de imagem fabricada.** O portfólio mostra apenas obras que existem, e os
+  cards de depoimento usam monograma no lugar de retratos — inventar rostos de clientes
+  seria enganoso. Os textos dos depoimentos, porém, ainda são fictícios e precisam ser
+  substituídos por avaliações reais.
 - **Formulário sem backend.** O briefing é montado e entregue no WhatsApp já formatado,
   que é como o estúdio realmente recebe orçamentos. A validação (Zod) roda antes disso.
   Para enviar a um CRM/e-mail, troque o corpo de `onSubmit` em

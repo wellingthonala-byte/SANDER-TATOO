@@ -14,12 +14,13 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { itemsByCategory, portfolioCategories, type PortfolioItem } from "@/data/portfolio";
+import { activeCategories, itemsByCategory, type PortfolioItem } from "@/data/portfolio";
 import { EASE } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/site";
 
 export function Portfolio() {
-  const [category, setCategory] = React.useState(portfolioCategories[0].id);
+  const [category, setCategory] = React.useState(activeCategories[0].id);
   const [preview, setPreview] = React.useState<PortfolioItem | null>(null);
 
   const items = React.useMemo(() => itemsByCategory(category), [category]);
@@ -39,7 +40,7 @@ export function Portfolio() {
 
         <Tabs value={category} onValueChange={setCategory} className="mt-14 lg:mt-16">
           <TabsList aria-label="Filtrar portfólio por estilo" className="border-y border-hairline">
-            {portfolioCategories.map((item) => (
+            {activeCategories.map((item) => (
               <TabsTrigger key={item.id} value={item.id} className="group">
                 {item.label}
                 <span
@@ -50,7 +51,7 @@ export function Portfolio() {
             ))}
           </TabsList>
 
-          {portfolioCategories.map((item) => (
+          {activeCategories.map((item) => (
             <TabsContent key={item.id} value={item.id} className="mt-10 lg:mt-12">
               <AnimatePresence mode="wait">
                 <m.ul
@@ -63,7 +64,15 @@ export function Portfolio() {
                     visible: { transition: { staggerChildren: 0.06 } },
                     exit: { transition: { staggerChildren: 0.02, staggerDirection: -1 } },
                   }}
-                  className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 lg:gap-5"
+                  // The grid narrows instead of stretching when a category has
+                  // only a piece or two, so the row stays centred and the cards
+                  // keep their proportions.
+                  className={cn(
+                    "grid gap-3 sm:gap-4 lg:gap-5",
+                    items.length === 1 && "mx-auto max-w-sm grid-cols-1",
+                    items.length === 2 && "mx-auto max-w-3xl grid-cols-1 sm:grid-cols-2",
+                    items.length > 2 && "grid-cols-2 lg:grid-cols-3",
+                  )}
                 >
                   {items.map((work) => (
                     <m.li
@@ -140,14 +149,16 @@ export function Portfolio() {
           {preview ? (
             <figure className="border border-hairline bg-surface">
               {/* Capped in viewport units so the panel always fits the screen,
-                  caption included, without the page scrolling behind it. */}
-              <div className="relative h-[62svh] w-full sm:aspect-16/10 sm:h-auto">
+                  caption included. `contain` because tattoo photos are tall and
+                  a wide crop would cut the piece in half — the whole point of
+                  opening it is seeing all of it. */}
+              <div className="relative h-[62svh] w-full bg-ink sm:h-[68vh]">
                 <Image
                   src={preview.src}
                   alt={preview.alt}
                   fill
                   sizes="(max-width: 1024px) 94vw, 60rem"
-                  className="object-cover"
+                  className="object-contain"
                 />
               </div>
               <figcaption className="flex flex-wrap items-center justify-between gap-2 border-t border-hairline px-4 py-4 sm:px-5">

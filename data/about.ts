@@ -17,7 +17,7 @@ export const aboutContent = {
   ],
   image: {
     src: asset("/images/studio.webp"),
-    alt: "Ambiente interno do estúdio Sander Tattoo Ink com iluminação baixa e quadros nas paredes",
+    alt: "Tatuador da Sander Tattoo Ink em plena sessão, trabalhando no braço de um cliente no estúdio",
   },
 } as const;
 

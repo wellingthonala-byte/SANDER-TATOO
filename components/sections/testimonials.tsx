@@ -116,15 +116,21 @@ export function Testimonials() {
                     </div>
 
                     <figcaption className="mt-6 flex items-center gap-4 border-t border-hairline pt-6">
-                      <span className="relative size-12 shrink-0 overflow-hidden rounded-full border border-hairline">
-                        <Image
-                          src={item.avatar}
-                          alt={`Foto de ${item.name}`}
-                          fill
-                          loading="lazy"
-                          sizes="48px"
-                          className="object-cover"
-                        />
+                      <span className="relative flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-full border border-hairline bg-surface-raised">
+                        {item.avatar ? (
+                          <Image
+                            src={item.avatar}
+                            alt={`Foto de ${item.name}`}
+                            fill
+                            loading="lazy"
+                            sizes="48px"
+                            className="object-cover"
+                          />
+                        ) : (
+                          <span aria-hidden className="font-display text-base text-bronze">
+                            {initials(item.name)}
+                          </span>
+                        )}
                       </span>
                       <span className="flex flex-col">
                         <span className="font-display text-lg leading-tight text-white">
@@ -169,6 +175,16 @@ export function Testimonials() {
       </div>
     </section>
   );
+}
+
+/** "Lucas Almeida" -> "LA" */
+function initials(name: string) {
+  return name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? "")
+    .join("");
 }
 
 function CarouselButton({

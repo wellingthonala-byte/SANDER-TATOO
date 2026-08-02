@@ -9,12 +9,17 @@ export type PortfolioItem = {
   id: string;
   category: PortfolioCategory["id"];
   title: string;
-  /** Body placement / session context shown on hover. */
+  /** Body placement / session context shown over the image. */
   meta: string;
   src: string;
   alt: string;
 };
 
+/**
+ * Every style the studio offers. A category with no work published yet is
+ * hidden from the filter automatically — see `activeCategories` below — so new
+ * photos are the only thing needed to bring a tab back.
+ */
 export const portfolioCategories: PortfolioCategory[] = [
   { id: "realismo", label: "Realismo" },
   { id: "fine-line", label: "Fine Line" },
@@ -23,92 +28,36 @@ export const portfolioCategories: PortfolioCategory[] = [
   { id: "coloridas", label: "Coloridas" },
 ];
 
-type Seed = {
-  category: string;
-  titles: [string, string, string, string, string, string];
-  metas: [string, string, string, string, string, string];
-};
-
-const seeds: Seed[] = [
+/**
+ * Real work from the studio.
+ *
+ * To publish another piece: drop the image in `public/images/` (4:5, WebP,
+ * ~860px wide) and add one entry here. Nothing else needs to change.
+ */
+export const portfolioItems: PortfolioItem[] = [
   {
-    category: "realismo",
-    titles: ["Zeus", "Leão", "Medusa", "Relógio", "Guerreira", "Cristo"],
-    metas: [
-      "Braço · 3 sessões",
-      "Antebraço · 2 sessões",
-      "Coxa · 3 sessões",
-      "Antebraço · 2 sessões",
-      "Braço · 4 sessões",
-      "Panturrilha · 2 sessões",
-    ],
-  },
-  {
-    category: "fine-line",
-    titles: ["Flor de lótus", "Constelação", "Andorinha", "Serpente", "Ramo", "Silhueta"],
-    metas: [
-      "Costela · 1 sessão",
-      "Clavícula · 1 sessão",
-      "Pulso · 1 sessão",
-      "Braço · 2 sessões",
-      "Costas · 1 sessão",
-      "Tornozelo · 1 sessão",
-    ],
-  },
-  {
-    category: "blackwork",
-    titles: ["Ornamental", "Máscara", "Geométrico", "Caveira", "Mandala", "Tribal moderno"],
-    metas: [
-      "Ombro · 2 sessões",
-      "Peito · 3 sessões",
-      "Antebraço · 2 sessões",
-      "Mão · 1 sessão",
-      "Costas · 3 sessões",
-      "Braço · 2 sessões",
-    ],
-  },
-  {
+    id: "dragao-oriental",
     category: "fechamento",
-    titles: ["Braço mitológico", "Costas completas", "Perna oriental", "Peitoral", "Manga preta", "Costela"],
-    metas: [
-      "Braço fechado · 8 sessões",
-      "Costas · 12 sessões",
-      "Perna · 10 sessões",
-      "Peitoral · 6 sessões",
-      "Braço fechado · 9 sessões",
-      "Costela · 5 sessões",
-    ],
+    title: "Dragão oriental",
+    meta: "Braço fechado",
+    src: asset("/images/work-sleeve.webp"),
+    alt: "Fechamento de braço em blackwork e sombreado: dragão oriental entre nuvens e flor de lótus",
   },
   {
-    category: "coloridas",
-    titles: ["Aquarela", "Neo tradicional", "Fênix", "Koi", "Floral", "Retrato em cor"],
-    metas: [
-      "Antebraço · 2 sessões",
-      "Coxa · 3 sessões",
-      "Costas · 4 sessões",
-      "Braço · 3 sessões",
-      "Ombro · 2 sessões",
-      "Panturrilha · 3 sessões",
-    ],
+    id: "retrato-realismo",
+    category: "realismo",
+    title: "Faces em realismo",
+    meta: "Antebraço",
+    src: asset("/images/work-forearm.webp"),
+    alt: "Tatuagem em realismo preto e cinza no antebraço, com três faces envoltas em bandagens",
   },
 ];
-
-const categoryLabel = (id: string) =>
-  portfolioCategories.find((category) => category.id === id)?.label ?? id;
-
-export const portfolioItems: PortfolioItem[] = seeds.flatMap((seed, seedIndex) =>
-  seed.titles.map((title, index) => {
-    const imageIndex = seedIndex * 6 + index + 1;
-    return {
-      id: `${seed.category}-${index + 1}`,
-      category: seed.category,
-      title,
-      meta: seed.metas[index],
-      src: asset(`/images/work-${String(imageIndex).padStart(2, "0")}.webp`),
-      alt: `Tatuagem estilo ${categoryLabel(seed.category)} — ${title}, ${seed.metas[index]}`,
-    };
-  }),
-);
 
 export function itemsByCategory(categoryId: string) {
   return portfolioItems.filter((item) => item.category === categoryId);
 }
+
+/** Only the categories that actually have published work. */
+export const activeCategories = portfolioCategories.filter(
+  (category) => itemsByCategory(category.id).length > 0,
+);
