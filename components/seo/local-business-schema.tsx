@@ -18,7 +18,7 @@ export function LocalBusinessSchema() {
         description: siteConfig.description,
         url: siteConfig.url,
         image: `${siteConfig.url}/images/og-image.webp`,
-        logo: `${siteConfig.url}/icon.svg`,
+        logo: `${siteConfig.url}/images/logo.webp`,
         telephone: `+55${contact.whatsapp.slice(2)}`,
         email: contact.email,
         priceRange: "$$",

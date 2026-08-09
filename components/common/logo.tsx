@@ -1,32 +1,34 @@
-import { cn } from "@/lib/utils";
+import Image from "next/image";
+
+import { asset } from "@/lib/assets";
 import { siteConfig } from "@/lib/site";
+import { cn } from "@/lib/utils";
 
 type LogoProps = {
   className?: string;
-  /** Hides the wordmark, keeping only the monogram. */
+  /** Hides the wordmark, keeping only the badge. */
   compact?: boolean;
+  /** Rendered size of the badge, in pixels. */
+  size?: number;
 };
 
-export function Logo({ className, compact = false }: LogoProps) {
+/**
+ * The studio's badge plus the wordmark. The badge carries the studio name in
+ * its ring, but at header size that lettering is decorative rather than
+ * readable — hence the wordmark beside it.
+ */
+export function Logo({ className, compact = false, size = 44 }: LogoProps) {
   return (
     <span className={cn("flex items-center gap-3", className)}>
-      <span className="relative flex size-10 items-center justify-center">
-        <svg viewBox="0 0 40 40" className="size-10" aria-hidden focusable="false">
-          <circle cx="20" cy="20" r="18.6" fill="none" stroke="currentColor" strokeOpacity="0.28" strokeWidth="1" />
-          <circle cx="20" cy="20" r="15.4" fill="none" stroke="currentColor" strokeOpacity="0.55" strokeWidth="0.7" />
-          <text
-            x="20"
-            y="26.4"
-            textAnchor="middle"
-            fontFamily="var(--font-display), Georgia, serif"
-            fontSize="19"
-            fontWeight="300"
-            fill="currentColor"
-          >
-            S
-          </text>
-        </svg>
-      </span>
+      <Image
+        src={asset("/images/logo-mark.webp")}
+        alt={compact ? siteConfig.name : ""}
+        aria-hidden={compact ? undefined : true}
+        width={size}
+        height={size}
+        className="shrink-0"
+        style={{ width: size, height: "auto" }}
+      />
 
       {!compact ? (
         <span className="flex flex-col leading-none">
@@ -38,8 +40,6 @@ export function Logo({ className, compact = false }: LogoProps) {
           </span>
         </span>
       ) : null}
-
-      {compact ? <span className="sr-only">{siteConfig.name}</span> : null}
     </span>
   );
 }

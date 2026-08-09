@@ -81,7 +81,14 @@ grava nas fotos.
 | `work-*.webp` | Portfólio (uma por obra) |
 | `cta-bg.webp` | Fundo do CTA final |
 | `faq-bg.webp` | Fundo do FAQ |
-| `og-image.webp` | Prévia ao compartilhar (Open Graph) |
+| `og-image.webp` | Prévia ao compartilhar (Open Graph), com o brasão sobreposto |
+| `logo-mark.webp` | Brasão no cabeçalho e no rodapé |
+| `logo.webp` | Brasão em tamanho maior: marca d'água do rodapé e dados estruturados |
+
+O favicon e o ícone de iOS ficam em `app/icon.png` e `app/apple-icon.png` — o Next
+os detecta pelo nome e injeta as tags sozinho. O brasão foi recortado do material
+enviado pelo estúdio e teve o fundo preto removido por luminância, para assentar
+tanto sobre o fundo do site quanto sobre fotografia.
 
 ### Publicando uma nova obra
 

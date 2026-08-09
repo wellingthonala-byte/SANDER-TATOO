@@ -1,7 +1,9 @@
+import Image from "next/image";
 import { Instagram, MapPin, Phone } from "lucide-react";
 
 import { Logo } from "@/components/common/logo";
 import { navItems } from "@/data/navigation";
+import { asset } from "@/lib/assets";
 import { siteConfig } from "@/lib/site";
 
 const { address, contact, hours } = siteConfig;
@@ -11,18 +13,21 @@ export function Footer() {
 
   return (
     <footer className="relative overflow-hidden bg-ink pt-20 pb-10">
-      {/* Oversized monogram watermark */}
-      <span
+      {/* Oversized badge watermark */}
+      <Image
+        src={asset("/images/logo.webp")}
+        alt=""
         aria-hidden
-        className="pointer-events-none absolute -right-10 -bottom-16 font-display text-[18rem] leading-none text-white/[0.025] select-none lg:text-[26rem]"
-      >
-        S
-      </span>
+        width={320}
+        height={320}
+        loading="lazy"
+        className="pointer-events-none absolute -right-16 -bottom-20 w-72 opacity-[0.06] select-none lg:-right-20 lg:w-[26rem]"
+      />
 
       <div className="container-page relative">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-10">
           <div className="max-w-xs">
-            <Logo className="text-white" />
+            <Logo className="text-white" size={56} />
             <p className="mt-7 text-[0.8125rem] leading-relaxed text-muted">
               Mais que tatuagens, criamos obras de arte que contam histórias e marcam vidas.
             </p>
