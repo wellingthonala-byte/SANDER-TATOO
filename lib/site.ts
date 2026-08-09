@@ -5,29 +5,30 @@
 export const siteConfig = {
   name: "Sander Tattoo Ink",
   shortName: "Sander Ink",
-  tagline: "Estúdio de tatuagem em São Paulo",
+  tagline: "Estúdio de tatuagem em Fortaleza",
   description:
-    "Estúdio de tatuagem especializado em realismo, fine line e blackwork. Projetos exclusivos, biossegurança rigorosa e acabamento impecável em São Paulo.",
+    "Estúdio de tatuagem especializado em realismo, fine line e blackwork. Projetos exclusivos, biossegurança rigorosa e acabamento impecável em Fortaleza.",
   url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://sandertattooink.com.br").replace(/\/$/, ""),
   locale: "pt_BR",
   founded: "2014",
   contact: {
-    phoneLabel: "(11) 98765-4321",
-    phoneHref: "tel:+5511987654321",
-    whatsapp: "5511987654321",
+    phoneLabel: "(88) 99962-5746",
+    phoneHref: "tel:+5588999625746",
+    whatsapp: "5588999625746",
     email: "contato@sandertattooink.com.br",
     instagram: "@sandertattooink",
     instagramUrl: "https://instagram.com/sandertattooink",
   },
   address: {
-    street: "Rua das Artes, 123",
-    district: "Vila Madalena",
-    city: "São Paulo",
-    state: "SP",
-    zip: "05434-000",
+    street: "Rua General Onofre, 453",
+    district: "Mondubim",
+    city: "Fortaleza",
+    state: "CE",
+    /** Deixe vazio para omitir o CEP do rodapé. */
+    zip: "",
     country: "BR",
-    mapsUrl: "https://maps.google.com/?q=Rua+das+Artes+123+Vila+Madalena+Sao+Paulo",
-    geo: { latitude: -23.5546, longitude: -46.6903 },
+    mapsUrl:
+      "https://maps.google.com/?q=Rua+General+Onofre+453+Mondubim+Fortaleza+CE",
   },
   hours: [
     { days: "Segunda a Sábado", time: "11h às 20h" },

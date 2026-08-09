@@ -55,7 +55,9 @@ export function Footer() {
             <li className="text-[0.8125rem] text-muted">
               {address.district} — {address.city}/{address.state}
             </li>
-            <li className="text-[0.8125rem] text-muted">CEP: {address.zip}</li>
+            {address.zip ? (
+              <li className="text-[0.8125rem] text-muted">CEP: {address.zip}</li>
+            ) : null}
           </FooterColumn>
 
           <FooterColumn title="Horário">

@@ -27,7 +27,7 @@ const sans = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} — Estúdio de Tatuagem em São Paulo`,
+    default: `${siteConfig.name} — Estúdio de Tatuagem em Fortaleza`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -39,8 +39,9 @@ export const metadata: Metadata = {
     "fine line",
     "blackwork",
     "fechamento de braço",
-    "tatuador São Paulo",
-    "Vila Madalena",
+    "tatuador Fortaleza",
+    "tatuagem Fortaleza",
+    "Mondubim",
   ],
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
   creator: siteConfig.name,
@@ -51,7 +52,7 @@ export const metadata: Metadata = {
     locale: siteConfig.locale,
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} — Estúdio de Tatuagem em São Paulo`,
+    title: `${siteConfig.name} — Estúdio de Tatuagem em Fortaleza`,
     description: siteConfig.description,
     images: [
       {
@@ -64,7 +65,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} — Estúdio de Tatuagem em São Paulo`,
+    title: `${siteConfig.name} — Estúdio de Tatuagem em Fortaleza`,
     description: siteConfig.description,
     images: [`${siteConfig.url}/images/og-image.webp`],
   },

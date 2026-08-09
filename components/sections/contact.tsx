@@ -167,7 +167,7 @@ export function Contact() {
                     type="tel"
                     inputMode="tel"
                     autoComplete="tel"
-                    placeholder="(11) 90000-0000"
+                    placeholder="(88) 90000-0000"
                     aria-invalid={Boolean(errors.phone)}
                     {...register("phone")}
                   />

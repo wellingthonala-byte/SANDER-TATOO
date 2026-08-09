@@ -30,13 +30,8 @@ export function LocalBusinessSchema() {
           streetAddress: address.street,
           addressLocality: `${address.district}, ${address.city}`,
           addressRegion: address.state,
-          postalCode: address.zip,
+          ...(address.zip ? { postalCode: address.zip } : {}),
           addressCountry: address.country,
-        },
-        geo: {
-          "@type": "GeoCoordinates",
-          latitude: address.geo.latitude,
-          longitude: address.geo.longitude,
         },
         openingHoursSpecification: siteConfig.openingHoursSchema.map((spec) => {
           const [days, time] = spec.split(" ");
