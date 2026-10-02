@@ -84,6 +84,30 @@ export const portfolioItems: PortfolioItem[] = [
     alt: "Realismo preto e cinza no ombro: figura alada de olhos vendados sob uma rosácea gótica",
   },
   {
+    id: "olhar-de-aguia",
+    category: "realismo",
+    title: "Olhar de águia",
+    meta: "Ombro e braço",
+    src: asset("/images/work-aguia-olho.webp"),
+    alt: "Realismo no ombro: águia de olho azul entre relógios rachados e um olho humano",
+  },
+  {
+    id: "redencao",
+    category: "realismo",
+    title: "Redenção",
+    meta: "Antebraço",
+    src: asset("/images/work-cristo-correntes.webp"),
+    alt: "Realismo preto e cinza no antebraço: figura alada com coroa de espinhos rompendo correntes sobre caveiras",
+  },
+  {
+    id: "zeus",
+    category: "realismo",
+    title: "Zeus",
+    meta: "Panturrilha",
+    src: asset("/images/work-zeus.webp"),
+    alt: "Realismo preto e cinza na panturrilha: rosto de Zeus fundido a uma águia, com raio e faixa grega",
+  },
+  {
     id: "fenix-floral",
     category: "fine-line",
     title: "Fênix floral",
@@ -114,6 +138,22 @@ export const portfolioItems: PortfolioItem[] = [
     meta: "Braço fechado",
     src: asset("/images/work-aguia.webp"),
     alt: "Fechamento de braço: águia realista sobre cartas de baralho, relógio e caveira",
+  },
+  {
+    id: "one-life-one-chance",
+    category: "fechamento",
+    title: "One life, one chance",
+    meta: "Perna fechada",
+    src: asset("/images/work-one-chance.webp"),
+    alt: "Fechamento de perna em estilo chicano: lettering One life one chance, palhaça com máscara e nota de cem dólares",
+  },
+  {
+    id: "gueixa-e-dragao",
+    category: "coloridas",
+    title: "Gueixa e dragão",
+    meta: "Costas fechadas",
+    src: asset("/images/work-gueixa-dragao.webp"),
+    alt: "Fechamento de costas colorido: gueixa entre flores de cerejeira rosadas ao lado de um dragão oriental",
   },
 ];
 
