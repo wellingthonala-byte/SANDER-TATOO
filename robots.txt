@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+
+Host: https://wellingthonala-byte.github.io/SANDER-TATOO
+Sitemap: https://wellingthonala-byte.github.io/SANDER-TATOO/sitemap.xml
