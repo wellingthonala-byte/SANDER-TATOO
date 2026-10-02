@@ -67,6 +67,7 @@ export function Footer() {
                 {entry.time}
               </li>
             ))}
+            <li className="text-[0.8125rem] text-muted">{siteConfig.bookingNote}</li>
           </FooterColumn>
         </div>
 
@@ -95,14 +96,18 @@ export function Footer() {
               ♥
             </span>
             por
-            <a
-              href={siteConfig.credits.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted transition-colors duration-400 hover:text-white"
-            >
-              {siteConfig.credits.label}
-            </a>
+            {siteConfig.credits.url ? (
+              <a
+                href={siteConfig.credits.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted transition-colors duration-400 hover:text-white"
+              >
+                {siteConfig.credits.label}
+              </a>
+            ) : (
+              <span className="text-muted">{siteConfig.credits.label}</span>
+            )}
           </p>
         </div>
       </div>

@@ -30,16 +30,14 @@ export const siteConfig = {
     mapsUrl:
       "https://maps.google.com/?q=Rua+General+Onofre+453+Mondubim+Fortaleza+CE",
   },
-  hours: [
-    { days: "Segunda a Sábado", time: "11h às 20h" },
-    { days: "Domingo", time: "Sob agendamento" },
-  ],
-  openingHoursSchema: [
-    "Mo-Sa 11:00-20:00",
-  ],
+  hours: [{ days: "Todos os dias", time: "09h às 22h" }],
+  /** Condição de atendimento, exibida junto do horário. */
+  bookingNote: "Somente com agendamento",
+  openingHoursSchema: ["Mo-Su 09:00-22:00"],
   credits: {
-    label: "@seu.dev",
-    url: "https://github.com",
+    label: "Nexcore",
+    /** Deixe vazio para exibir o crédito sem link. */
+    url: "",
   },
 } as const;
 

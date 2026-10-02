@@ -38,7 +38,10 @@ const details = [
   {
     icon: Clock,
     label: "Horário",
-    value: hours.map((entry) => `${entry.days}: ${entry.time}`).join(" · "),
+    value: [
+      ...hours.map((entry) => `${entry.days}: ${entry.time}`),
+      siteConfig.bookingNote,
+    ].join(" · "),
   },
 ];
 
